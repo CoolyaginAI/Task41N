@@ -1,0 +1,4 @@
+2024-06-25 16:58:20.915525+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT * [*]FROMMESSAGE"
+Syntax error in SQL statement "SELECT * [*]FROMMESSAGE"; SQL statement:
+SELECT * FROMMESSAGE [42000-224]
