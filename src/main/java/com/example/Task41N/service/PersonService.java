@@ -44,7 +44,7 @@ public class PersonService {
         for (int i=0; i<messages.size(); i++)
             if (messages.get(i).getId() == idMessage) { return messages.get(i);}
 
-        // НЕ ХОРОШАЯ ВЕЩЬ
+        // НЕ ХОРОШАЯ ВЕЩЬ, ЕСЛИ НАДО МОГУ ДРУГУЮ ВАРИАЦИЮ ЭТОГО ПРИДУМАТЬ
         return null;
     }
 
