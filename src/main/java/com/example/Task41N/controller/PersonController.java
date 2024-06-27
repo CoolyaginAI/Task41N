@@ -70,7 +70,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/{p_id}/message/{m_id}")
-    public Message findMessageById(@PathVariable int p_id, @PathVariable int m_id) {
+    public Optional<Message> findMessageById(@PathVariable int p_id, @PathVariable int m_id) {
         return personService.findMessageById(p_id, m_id);
     }
 

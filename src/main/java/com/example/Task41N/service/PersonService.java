@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -38,14 +39,16 @@ public class PersonService {
         repositoryMessage.deleteById(idMessage);
     }
 
-    public Message findMessageById (int idPerson, int idMessage) {
+    public Optional<Message> findMessageById (int idPerson, int idMessage) {
         List<Message> messages = repositoryPerson.findById(idPerson).get().getMessages();
+        Optional<Message> findMessage = Optional.empty();
 
         for (int i=0; i<messages.size(); i++)
-            if (messages.get(i).getId() == idMessage) { return messages.get(i);}
+            if (messages.get(i).getId() == idMessage) {
+                findMessage = Optional.ofNullable(messages.get(i));
+            }
 
-        // НЕ ХОРОШАЯ ВЕЩЬ, ЕСЛИ НАДО МОГУ ДРУГУЮ ВАРИАЦИЮ ЭТОГО ПРИДУМАТЬ
-        return null;
+        return findMessage;
     }
 
     public void updatePerson (int id, Person person) {
