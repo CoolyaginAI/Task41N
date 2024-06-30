@@ -76,4 +76,5 @@ public class Message {
     public void setPerson(Person person) {
         this.person = person;
     }
+
 }

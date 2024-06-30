@@ -20,12 +20,41 @@ public class PersonService {
     @Autowired
     MessageRepository repositoryMessage;
 
-    public Person addMessageToPerson (int id, Message message) {
+    public Iterable<Person> getPerson() {
+        return repositoryPerson.findAll();
+    }
 
-        Person person = repositoryPerson.findById(id).get();
+    public Optional<Person> findPersonById(int idPerson) {
+        return repositoryPerson.findById(idPerson);
+    }
+
+    public Person addPerson(Person person) {
+        repositoryPerson.save(person);
+        return person;
+    }
+
+    public boolean existById(int idPerson) {
+        return repositoryPerson.existsById(idPerson);
+    }
+
+    public void updatePerson (int id, Person person) {
+        repositoryPerson.findById(id).get().setFirstname(person.getFirstname());
+        repositoryPerson.findById(id).get().setSurname(person.getSurname());
+        repositoryPerson.findById(id).get().setLastname(person.getLastname());
+        repositoryPerson.findById(id).get().setBirthday(person.getBirthday());
+        repositoryPerson.save(repositoryPerson.findById(id).get());
+    }
+
+    public void deletePersonById (int idPerson) {
+        repositoryPerson.deleteById(idPerson);
+    }
+
+    public Person addMessageToPerson (int idMessage, Message message) {
+
+        Person person = repositoryPerson.findById(idMessage).get();
         message.setPerson(person);
         message.setTime(LocalDateTime.now());
-        person.addMessage(message);
+        person.getMessages().add(message);
 
         return repositoryPerson.save(person);
     }
@@ -51,12 +80,5 @@ public class PersonService {
         return findMessage;
     }
 
-    public void updatePerson (int id, Person person) {
-        repositoryPerson.findById(id).get().setFirstname(person.getFirstname());
-        repositoryPerson.findById(id).get().setSurname(person.getSurname());
-        repositoryPerson.findById(id).get().setLastname(person.getLastname());
-        repositoryPerson.findById(id).get().setBirthday(person.getBirthday());
-        repositoryPerson.save(repositoryPerson.findById(id).get());
-    }
 
 }

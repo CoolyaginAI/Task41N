@@ -81,8 +81,4 @@ public class Person {
         this.messages = messages;
     }
 
-    public void addMessage(Message message) {
-        messages.add(message);
-    }
-
 }

@@ -20,24 +20,23 @@ public class MessageController {
 
     @GetMapping("/message")
     public Iterable<Message> getMessage() {
-        return messageRepository.findAll();
+        return messageService.getMessage();
     }
 
     @GetMapping("/message/{id}")
     public Optional<Message> findMessageById(@PathVariable int id) {
-        return messageRepository.findById(id);
+        return messageService.findMessageById(id);
     }
 
     @PostMapping("/message")
     public Message addMessage(@RequestBody Message message) {
-        messageRepository.save(message);
-        return message;
+        return messageService.addMessage(message);
     }
 
     @PutMapping("/message/{id}")
     public HttpStatus updateMessage(@PathVariable int id, @RequestBody Message message) {
 
-        HttpStatus status = messageRepository.existsById(id) ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        HttpStatus status = messageService.existsMessageById(id) ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
 
         if (status == HttpStatus.OK) {
             messageService.updateMessage(id, message);
@@ -49,7 +48,7 @@ public class MessageController {
 
     @DeleteMapping("/message/{id}")
     public void deleteMessage(@PathVariable int id) {
-        messageRepository.deleteById(id);
+        messageService.deleteMessageById(id);
     }
 
 }
